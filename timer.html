@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Таймер</title>
+    <style>
+        body {
+            background-color: #000; /* Чёрный фон */
+            color: #fff; /* Белый текст */
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        #timer {
+            font-size: 2em;
+            text-shadow: 0 0 10px red, 0 0 20px red, 0 0 30px red, 0 0 40px red; /* Эффект красного свечения */
+        }
+    </style>
+</head>
+<body>
+    <div id="timer">Загрузка...</div>
+
+    <script>
+        function updateTimer() {
+            const targetDate = new Date("November 30, 2024 00:00:00").getTime();
+            const now = new Date().getTime();
+            const timeRemaining = targetDate - now;
+
+            const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+            document.getElementById("timer").innerHTML = 
+                days + " дней " + hours + " часов " + minutes + " минут " + seconds + " секунд";
+
+            if (timeRemaining < 0) {
+                document.getElementById("timer").innerHTML = "Время истекло!";
+            }
+        }
+
+        setInterval(updateTimer, 1000);
+        updateTimer();
+    </script>
+</body>
+</html>
